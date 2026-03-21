@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+env/
+*.db              # blog.db nahi jaayega
+
+# React / Node
+node_modules/
+dist/
+build/
+.DS_Store
+
+# Database
+*.db
+*.sqlite
