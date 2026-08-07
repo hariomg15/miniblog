@@ -9,23 +9,44 @@ Full-stack blog application with JWT authentication.
 ## Features
 - User signup & login with JWT authentication
 - Create, read, delete blog posts
-- Protected routes — only logged-in users can post
+- Protected routes - only logged-in users can post
 - PostgreSQL database with relationships
 
-## Setup
+## Environment Setup
 
 ### Backend
-```
+```bash
 cd backend
+copy .env.example .env
+```
+
+Update `backend/.env` with your own values:
+
+```env
+DATABASE_URL=postgresql://postgres:your_password@localhost:5433/blogdb
+SECRET_KEY=replace-with-a-long-random-secret
+CORS_ORIGINS=http://localhost:5173
+```
+
+Then run:
+
+```bash
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
 ### Frontend
-```
+```bash
 cd blog-frontend
+copy .env.example .env
 npm install
 npm run dev
+```
+
+Frontend env:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
 ```
 
 ## API Endpoints

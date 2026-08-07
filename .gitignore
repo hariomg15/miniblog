@@ -3,6 +3,10 @@ __pycache__/
 *.pyc
 *.pyo
 .env
+.env.*
+!.env.example
+!backend/.env.example
+!blog-frontend/.env.example
 venv/
 env/
 *.db              # blog.db nahi jaayega
