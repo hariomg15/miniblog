@@ -23,9 +23,15 @@ copy .env.example .env
 Update `backend/.env` with your own values:
 
 ```env
-DATABASE_URL=postgresql://postgres:your_password@localhost:5433/blogdb
+DATABASE_URL=sqlite:///./blog.db
 SECRET_KEY=replace-with-a-long-random-secret
 CORS_ORIGINS=http://localhost:5173
+```
+
+For PostgreSQL, replace it with your own connection string, for example:
+
+```env
+DATABASE_URL=postgresql://postgres:your_password@localhost:5433/blogdb
 ```
 
 Then run:

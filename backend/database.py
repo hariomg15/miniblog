@@ -4,9 +4,13 @@ from sqlalchemy.orm import sessionmaker
 
 from config import get_env
 
-DATABASE_URL = get_env("DATABASE_URL", "postgresql://postgres:password@localhost:5433/blogdb")
+DATABASE_URL = get_env("DATABASE_URL", "sqlite:///./blog.db")
 
-engine = create_engine(DATABASE_URL)
+engine_kwargs = {}
+if DATABASE_URL.startswith("sqlite"):
+    engine_kwargs["connect_args"] = {"check_same_thread": False}
+
+engine = create_engine(DATABASE_URL, **engine_kwargs)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
