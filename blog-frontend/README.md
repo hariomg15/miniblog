@@ -1,16 +1,36 @@
-# React + Vite
+# Blog Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This frontend is built with React and Vite for the Blog Management System project.
 
-Currently, two official plugins are available:
+## Features Supported
+- User signup and login
+- Role display for the current account
+- Create, edit, and delete posts
+- Category selection for posts
+- Search and category filter
+- Pagination for post listing
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run the Frontend
+```powershell
+cd blog-frontend
+copy .env.example .env
+npm install
+npm run dev
+```
 
-## React Compiler
+## Environment Variable
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development URL
+```text
+http://localhost:5173
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Main Frontend Files
+- `src/App.jsx` controls basic page switching
+- `src/api.js` contains API request helpers
+- `src/pages/Login.jsx` handles user login
+- `src/pages/Signup.jsx` handles user registration
+- `src/pages/Posts.jsx` handles post management, search, filters, and pagination

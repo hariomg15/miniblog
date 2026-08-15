@@ -8,14 +8,14 @@ export default function Signup({ onSwitch }) {
   const [ok, setOk]             = useState(false)
 
   const handle = async () => {
-    if (!email || !password) { setMsg("Dono fields bharo"); return }
+    if (!email || !password) { setMsg("Please fill in both fields"); return }
     const d = await apiSignup(email, password)
     if (d.id) {
       setOk(true)
-      setMsg("Account ban gaya! Login karo.")
+      setMsg("Account created successfully. Please sign in.")
       setTimeout(() => onSwitch("login"), 1500)
     } else {
-      setMsg(d.detail || "Error aaya")
+      setMsg(d.detail || "Something went wrong")
     }
   }
 
@@ -26,13 +26,10 @@ export default function Signup({ onSwitch }) {
         onChange={e => setEmail(e.target.value)} />
       <input style={C.inp} type="password" placeholder="Password"
         value={password} onChange={e => setPassword(e.target.value)} />
-      <button style={C.btn} onClick={handle}>Account banao</button>
-      {/* <button onClick={() => console.log("Button clicked!")}>
-        Account banao
-      </button> */}
+      <button style={C.btn} onClick={handle}>Create Account</button>
       {msg && <p style={{...C.msg, color: ok ? "#1D9E75" : "#E24B4A"}}>{msg}</p>}
       <p style={C.link} onClick={() => onSwitch("login")}>
-        Pehle se account hai? Login karo
+        Already have an account? Sign in
       </p>
     </div>
   )

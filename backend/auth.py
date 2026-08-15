@@ -14,7 +14,7 @@ SECRET_KEY = get_env("SECRET_KEY", "change-me-in-backend-env")
 ALGORITHM = "HS256"
 EXPIRE_MIN = 30
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
@@ -36,7 +36,7 @@ def create_access_token(data: dict) -> str:
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     err = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Token invalid ya expire ho gaya",
+        detail="Invalid or expired token",
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:

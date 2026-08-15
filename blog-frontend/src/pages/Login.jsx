@@ -8,7 +8,7 @@ export default function Login({ onSwitch, onLogin }) {
   const [loading, setLoading]   = useState(false)
 
   const handle = async () => {
-    if (!email || !password) { setMsg("Dono fields bharo"); return }
+    if (!email || !password) { setMsg("Please fill in both fields"); return }
     setLoading(true)
     const d = await apiLogin(email, password)
     setLoading(false)
@@ -16,7 +16,7 @@ export default function Login({ onSwitch, onLogin }) {
       saveToken(d.access_token)
       onLogin()
     } else {
-      setMsg(d.detail || "Galat email ya password")
+      setMsg(d.detail || "Invalid email or password")
     }
   }
 
@@ -28,11 +28,11 @@ export default function Login({ onSwitch, onLogin }) {
       <input style={C.inp} type="password" placeholder="Password"
         value={password} onChange={e => setPassword(e.target.value)} />
       <button style={C.btn} onClick={handle} disabled={loading}>
-        {loading ? "Login ho raha..." : "Login karo"}
+        {loading ? "Signing in..." : "Sign In"}
       </button>
       {msg && <p style={{...C.msg, color:"#E24B4A"}}>{msg}</p>}
       <p style={C.link} onClick={() => onSwitch("signup")}>
-        Account nahi hai? Signup karo
+        Do not have an account? Sign up
       </p>
     </div>
   )

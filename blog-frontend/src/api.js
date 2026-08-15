@@ -27,13 +27,41 @@ export const apiLogin = async (email, password) => {
   return response.json()
 }
 
-export const apiGetPosts = async () => (await fetch(`${BASE}/posts`)).json()
+export const apiGetPosts = async (search = "", category = "All", page = 1, pageSize = 5) => {
+  const params = new URLSearchParams()
+  if (search.trim()) params.set("q", search.trim())
+  if (category && category !== "All") params.set("category", category)
+  params.set("page", String(page))
+  params.set("page_size", String(pageSize))
 
-export const apiCreatePost = async (title, content) => {
+  const queryString = params.toString()
+  const url = queryString ? `${BASE}/posts?${queryString}` : `${BASE}/posts`
+  return (await fetch(url)).json()
+}
+
+export const apiGetCategories = async () => (await fetch(`${BASE}/categories`)).json()
+
+export const apiGetMe = async () => {
+  const response = await fetch(`${BASE}/me`, {
+    headers: authH()
+  })
+  return response.json()
+}
+
+export const apiCreatePost = async (title, content, category) => {
   const response = await fetch(`${BASE}/posts`, {
     method: "POST",
     headers: authH(),
-    body: JSON.stringify({ title, content })
+    body: JSON.stringify({ title, content, category })
+  })
+  return response.json()
+}
+
+export const apiUpdatePost = async (id, title, content, category) => {
+  const response = await fetch(`${BASE}/posts/${id}`, {
+    method: "PUT",
+    headers: authH(),
+    body: JSON.stringify({ title, content, category, published: true })
   })
   return response.json()
 }
